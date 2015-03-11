@@ -23,6 +23,16 @@ class CommentsResource extends AbstractResource {
         );
     }
 
+    public function postAction($params)
+    {
+        $newComment=Manager::getService("TrainingComments")->create(array(
+            "comment"=>$params["comment"]
+        ));
+        return array(
+            'success' => true,
+        );
+    }
+
 
     protected function define()
     {
@@ -37,6 +47,17 @@ class CommentsResource extends AbstractResource {
                         (new FilterDefinitionEntity())
                             ->setDescription('Comments')
                             ->setKey('comments')
+                            ->setRequired()
+                    );
+            })
+            ->editVerb('post', function(VerbDefinitionEntity &$entity) {
+                $entity
+                    ->setDescription('Get all comments')
+                    ->addInputFilter(
+                        (new FilterDefinitionEntity())
+                            ->setDescription('Comment')
+                            ->setFilter("string")
+                            ->setKey('comment')
                             ->setRequired()
                     );
             });
