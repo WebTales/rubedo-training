@@ -87,4 +87,12 @@ return array(
 
         ),
     ),
+
+    /**
+     * API namespace definitions
+     */
+
+    'namespaces_api' => array(
+        'RubedoTraining',
+    ),
 );
