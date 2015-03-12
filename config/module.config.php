@@ -13,6 +13,7 @@ return array(
                     '/css/bootstrap.css',
                 ),
                 'js' => array(
+                    '/js/training.js'
                 ),
             ),
         ),
@@ -25,6 +26,10 @@ return array(
         'signUp' => array(
             'maxlifeTime' => 60,
             'definitionFile' => realpath(__DIR__ . "/blocks/") . '/signUp.json'
+        ),
+        'trainingComments' => array(
+            'maxlifeTime' => 60,
+            'definitionFile' => realpath(__DIR__ . "/blocks/") . '/trainingComments.json'
         )
     ),
 

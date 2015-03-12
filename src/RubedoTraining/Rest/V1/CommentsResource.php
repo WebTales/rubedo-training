@@ -53,6 +53,7 @@ class CommentsResource extends AbstractResource {
             ->editVerb('post', function(VerbDefinitionEntity &$entity) {
                 $entity
                     ->setDescription('Get all comments')
+                    ->identityRequired()
                     ->addInputFilter(
                         (new FilterDefinitionEntity())
                             ->setDescription('Comment')
