@@ -100,4 +100,15 @@ return array(
     'namespaces_api' => array(
         'RubedoTraining',
     ),
+
+    /**
+     * BO extension definition
+     */
+
+    'appExtension' => array(
+        'rubedotraining' => array(
+            'basePath' => realpath(__DIR__ . '/../app-extension') . '/rubedotraining',
+            'definitionFile' => realpath(__DIR__ . '/../app-extension') . '/rubedotraining.json'
+        )
+    ),
 );

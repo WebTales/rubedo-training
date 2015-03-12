@@ -1,0 +1,9 @@
+{
+    "extensionName": "rubedotraining",
+    "models":["TrainingComment"],
+    "stores":["TrainingComments"],
+    "launchButtons":{
+        "studio":[],
+        "administration":[]
+    }
+}
