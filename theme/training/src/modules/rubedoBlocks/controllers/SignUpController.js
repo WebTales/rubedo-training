@@ -1,4 +1,4 @@
-angular.module("rubedoBlocks").lazy.controller('SignUpController',['$scope','RubedoUserTypesService','RubedoUsersService', '$location','RubedoMailingListService','RubedoAuthService', function($scope, RubedoUserTypesService, RubedoUsersService, $location, RubedoMailingListService,RubedoAuthService){
+angular.module("rubedoBlocks").lazy.controller('SignUpController',['$scope','RubedoUserTypesService','RubedoUsersService', '$location','RubedoMailingListService','RubedoAuthService','RubedoPagesService', function($scope, RubedoUserTypesService, RubedoUsersService, $location, RubedoMailingListService,RubedoAuthService,RubedoPagesService){
     var me = this;
     var config = $scope.blockConfig;
     me.inputFields=[ ];
@@ -30,7 +30,15 @@ angular.module("rubedoBlocks").lazy.controller('SignUpController',['$scope','Rub
                         };
                         RubedoAuthService.generateToken(me.credentials,false).then(
                             function(response){
-                                window.location.reload();
+                                if(config.profilePage){
+                                    RubedoPagesService.getPageById(config.profilePage).then(function(response){
+                                        if (response.data.success){
+                                            window.location.href=response.data.url;
+                                        }
+                                    });
+                                } else {
+                                    window.location.reload();
+                                }
                             },
                             function(response){
                                 me.authError=response.data.message;
