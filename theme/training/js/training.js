@@ -5,15 +5,16 @@ blocksConfig.trainingComments={
 
 angular.module("rubedoDataAccess").factory('CommentsService', ['$http',function($http) {
     var serviceInstance={};
-    serviceInstance.getComments=function(){
-        return ($http.get("api/v1/comments"));
+    serviceInstance.getComments=function(contentId){
+        return ($http.get("api/v1/comments",{params:{contentId:contentId}}));
     };
-    serviceInstance.createComment=function(comment){
+    serviceInstance.createComment=function(comment,contentId){
         return ($http({
             url:"api/v1/comments",
             method:"POST",
             data : {
-                comment:comment
+                comment:comment,
+                contentId:contentId
             }
         }));
     };

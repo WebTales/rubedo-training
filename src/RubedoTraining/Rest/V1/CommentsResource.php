@@ -5,6 +5,7 @@ use Rubedo\Services\Manager;
 use RubedoAPI\Entities\API\Definition\FilterDefinitionEntity;
 use RubedoAPI\Entities\API\Definition\VerbDefinitionEntity;
 use RubedoAPI\Rest\V1\AbstractResource;
+use WebTales\MongoFilters\Filter;
 
 class CommentsResource extends AbstractResource {
 
@@ -28,6 +29,12 @@ class CommentsResource extends AbstractResource {
                             ->setDescription('Comments')
                             ->setKey('comments')
                             ->setRequired()
+                    )->addInputFilter(
+                        (new FilterDefinitionEntity())
+                            ->setDescription('ContentId')
+                            ->setFilter('\\MongoId')
+                            ->setKey('contentId')
+                            ->setRequired()
                     );
             })->editVerb('post', function(VerbDefinitionEntity &$entity) {
                 $entity
@@ -39,13 +46,23 @@ class CommentsResource extends AbstractResource {
                             ->setFilter("string")
                             ->setKey('comment')
                             ->setRequired()
+                    )->addInputFilter(
+                        (new FilterDefinitionEntity())
+                            ->setDescription('ContentId')
+                            ->setFilter('\\MongoId')
+                            ->setKey('contentId')
+                            ->setRequired()
                     );
             });
     }
 
     public function getAction($params)
     {
-        $comments=Manager::getService("TrainingComments")->getList();
+        $filter=Filter::factory();
+        $filter->addFilter(
+            Filter::factory("Value")->setName("contentId")->setValue($params["contentId"])
+        );
+        $comments=Manager::getService("TrainingComments")->getList($filter);
         return array(
             'success' => true,
             'comments'=>$comments["data"]
@@ -55,7 +72,8 @@ class CommentsResource extends AbstractResource {
     public function postAction($params)
     {
         $newComment=Manager::getService("TrainingComments")->create(array(
-            "comment"=>$params["comment"]
+            "comment"=>$params["comment"],
+            "contentId"=>$params["contentId"]
         ));
         return array(
             'success' => true,

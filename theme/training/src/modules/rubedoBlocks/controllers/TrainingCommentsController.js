@@ -1,10 +1,10 @@
-angular.module("rubedoBlocks").lazy.controller("TrainingCommentsController",["$scope","CommentsService",
-    function($scope,CommentsService){
+angular.module("rubedoBlocks").lazy.controller("TrainingCommentsController",["$scope","CommentsService","$route",
+    function($scope,CommentsService,$route){
         var me = this;
         var config = $scope.blockConfig;
         me.newComment=null;
         me.loadComments=function(){
-            CommentsService.getComments().then(
+            CommentsService.getComments(me.contentId).then(
                 function(response){
                     me.comments=response.data.comments;
                 }
@@ -12,7 +12,7 @@ angular.module("rubedoBlocks").lazy.controller("TrainingCommentsController",["$s
         };
         me.createComment=function(){
             if (me.newComment){
-                CommentsService.createComment(me.newComment).then(
+                CommentsService.createComment(me.newComment,me.contentId).then(
                     function(response){
                         me.newComment=null;
                         me.loadComments();
@@ -20,5 +20,7 @@ angular.module("rubedoBlocks").lazy.controller("TrainingCommentsController",["$s
                 );
             }
         };
+        var routeArray=angular.copy($route.current.params.routeline).split("/");
+        me.contentId=routeArray[routeArray.length-2];
         me.loadComments();
     }]);
