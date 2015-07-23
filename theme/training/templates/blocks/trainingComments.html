@@ -1,3 +1,7 @@
 <div ng-controller="TrainingCommentsController as tcCtrl">
-    <h1>TEST COMMENTS</h1>
+    <h2>Comments</h2>
+    <blockquote ng-repeat="comment in tcCtrl.comments">
+        <p>{{comment.comment}}</p>
+        <footer>{{comment.createUser.fullName}}</footer>
+    </blockquote>
 </div>
