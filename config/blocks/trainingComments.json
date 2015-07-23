@@ -1,0 +1,24 @@
+{
+    "type": "Training comments",
+    "description": "Training comments description",
+    "configBasique": {
+        "title": "Training comments",
+        "bType": "trainingComments",
+        "flex": 1,
+        "champsConfig": {
+            "simple": [
+
+            ],
+            "avance": [
+
+            ]
+        },
+        "configBloc": {
+        }
+
+
+    },
+    "category": "Training",
+    "bType": "trainingComments",
+    "id": "55b095b380dd20280e000072"
+}
