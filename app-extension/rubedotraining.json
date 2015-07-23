@@ -1,0 +1,15 @@
+{
+  "extensionName": "rubedotraining",
+  "models":["TrainingComment"],
+  "stores":["TrainingComments"],
+  "views":["TrainingCommentsInterface"],
+  "launchButtons":{
+    "studio":[{
+      "favoriteIcon": "processes.png",
+      "itemId": "TrainingCommentsInterface",
+      "iconCls": "process-icon",
+      "text": "Comments"
+    }],
+    "administration":[]
+  }
+}
