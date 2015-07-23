@@ -8,5 +8,14 @@ angular.module("rubedoDataAccess").factory('CommentsService', ['$http',function(
     serviceInstance.getComments=function(){
         return ($http.get("api/v1/comments"));
     };
+    serviceInstance.createComment=function(comment){
+        return ($http({
+            url:"api/v1/comments",
+            method:"POST",
+            data : {
+                comment:comment
+            }
+        }));
+    };
     return serviceInstance;
 }]);

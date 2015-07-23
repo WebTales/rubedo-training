@@ -32,6 +32,7 @@ class CommentsResource extends AbstractResource {
             })->editVerb('post', function(VerbDefinitionEntity &$entity) {
                 $entity
                     ->setDescription('Create new comment')
+                    ->identityRequired()
                     ->addInputFilter(
                         (new FilterDefinitionEntity())
                             ->setDescription('Comment')
