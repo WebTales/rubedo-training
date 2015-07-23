@@ -12,6 +12,7 @@ return array(
                     '/css/bootstrap.css',
                 ),
                 'js' => array(
+                    '/js/training.js',
                 ),
             ),
         ),
