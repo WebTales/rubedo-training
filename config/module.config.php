@@ -32,4 +32,60 @@ return array(
         )
     ),
 
+    /**
+     * Service definitions
+     */
+    'service_manager' => array(
+        'invokables' => array(
+            'RubedoTraining\\Collection\\TrainingComments' => 'RubedoTraining\\Collection\\TrainingComments',
+        ),
+        'aliases' => array(
+            'API\\Collection\\TrainingComments' => 'RubedoTraining\\Collection\\TrainingComments',
+            'TrainingComments' => 'RubedoTraining\\Collection\\TrainingComments',
+        ),
+    ),
+
+    /**
+     * Controller definitions
+     */
+    'controllers' => array(
+        'invokables' => array(
+            'RubedoTraining\\Backoffice\\Controller\\TrainingComments' => 'RubedoTraining\\Backoffice\\Controller\\TrainingCommentsController'
+        ),
+    ),
+
+    /**
+     * Route definitions (for BO controllers)
+     */
+    'router' => array (
+        'routes' => array(
+            'training-comments' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/backoffice/training-comments',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'RubedoTraining\\Backoffice\\Controller',
+                        'controller' => 'training-comments',
+                        'action' => 'index'
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/[:action]',
+                            '__NAMESPACE__' => 'RubedoTraining\\Backoffice\\Controller',
+                            'constraints' => array(
+                                'controller' => 'training-comments',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*'
+                            ),
+                            'defaults' => array()
+                        )
+                    )
+                )
+            ),
+        ),
+    ),
+
 );
